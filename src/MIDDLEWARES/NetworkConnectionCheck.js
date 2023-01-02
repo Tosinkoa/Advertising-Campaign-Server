@@ -15,7 +15,6 @@ const MW_Check_Connection = async (req, res, next) => {
         })
       })
     }
-
     const result = await isConnected()
     if (result === false) return res.status(400).send({ error: "Make sure you're connected to the internet!" })
     next()
