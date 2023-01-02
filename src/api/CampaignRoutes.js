@@ -16,6 +16,7 @@ router.post("/create-campaign", MW_Check_Connection, async (req, res) => {
   CAMPAIGN_IMAGES(req, res, async (err) => {
     try {
       const { name, from_date, to_date, total_budget, daily_budget } = req.body
+      // Validate request body
       const { error, value } = validateCampaign(req.body)
       if (error) return res.status(400).json({ error: error.details.map((e) => e.context.label) })
       if (!req.file) res.status(400).json({ error: "Make sure you upload at least one image" })
@@ -59,16 +60,14 @@ router.post("/create-campaign", MW_Check_Connection, async (req, res) => {
 //=======================================================================
 router.put("/update-campaign/:campaignId", MW_Check_Connection, async (req, res) => {
   try {
-    console.log("Outside All")
     CAMPAIGN_IMAGES(req, res, async (err) => {
       const { campaignId } = req.params
       const { name, from_date, to_date, total_budget, daily_budget } = req.body
+      // Validate request body
       const { error, value } = validateCampaign(req.body)
       if (error) return res.status(400).json({ error: error.details.map((e) => e.context.label) })
 
-      console.log("Before All")
       const alreadyExistCampaignImages = await CampaignQueries.selectCampaignWithId(campaignId)
-      console.log("After already exist")
       if (alreadyExistCampaignImages.rowCount < 1) return res.status(400).json({ error: "Campaign didnot exist" })
       // Delete the previous image on cloudinary with cloudinary public id and create a new one
       let createImageOnCloudinary
@@ -147,6 +146,7 @@ router.delete("/delete-campaign/:campaignId", MW_Check_Connection, async (req, r
   const { campaignId } = req.params
   try {
     const selectedCampaign = await CampaignQueries.selectCampaignWithId(campaignId)
+    // Destro
     await cloudinary.uploader.destroy(selectedCampaign.rows[0].creative_upload_id)
     if (selectedCampaign.rowCount < 1) return res.status(400).json({ error: "Campaign didnot exist" })
     await CampaignQueries.deleteCampaign(campaignId)

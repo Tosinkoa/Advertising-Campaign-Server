@@ -11,7 +11,7 @@ const app = express()
 dotenv.config()
 
 const productionCorsConfig = {
-  origin: [""],
+  origin: ["https://advertisement-campaign.netlify.app"],
   credentials: true,
   methods: "GET, PUT, POST, DELETE",
   optionsSuccessStatus: 200,
