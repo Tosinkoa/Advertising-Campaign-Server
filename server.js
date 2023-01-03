@@ -1,6 +1,5 @@
 import express from "express"
 import cookieParser from "cookie-parser"
-import connectPgSimple from "connect-pg-simple"
 import dotenv from "dotenv"
 import cors from "cors"
 import "./src/LIB/DB-Client.js"

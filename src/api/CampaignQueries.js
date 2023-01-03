@@ -8,7 +8,7 @@ export const CampaignQueries = {
   },
 
   selectAllCampaign() {
-    const data = pool.query("SELECT * FROM campaign")
+    const data = pool.query("SELECT * FROM campaign ORDER BY id DESC")
     return data
   },
 
