@@ -1,5 +1,4 @@
 import dayjs from "dayjs"
-import("./DayjsConfig.js")
 
 const CurrentDate = () => {
   const date = dayjs().format()
