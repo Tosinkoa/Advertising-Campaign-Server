@@ -1,7 +1,3 @@
--- migrate:down
-drop table if exists campaign cascade;
-drop table if exists campaign_images cascade;
-
 -- migrate:up
 create extension if not exists citext;
 -- migrate:up
@@ -17,3 +13,7 @@ create table if not exists campaign (
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now()
 );
+
+-- migrate:down
+drop table if exists campaign cascade;
+drop table if exists campaign_images cascade;
