@@ -29,6 +29,8 @@ module.exports = {
           "./package.json",
           "./yarn.lock",
           "./src",
+          "./error.log",
+          "./out.log",
         ],
       },
     },
