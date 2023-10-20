@@ -10,17 +10,10 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: timescaledb; Type: EXTENSION; Schema: -; Owner: -
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
 --
 
-CREATE EXTENSION IF NOT EXISTS timescaledb WITH SCHEMA public;
-
-
---
--- Name: EXTENSION timescaledb; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION timescaledb IS 'Enables scalable inserts and complex queries for time-series data';
+-- *not* creating schema, since initdb creates it
 
 
 --
@@ -78,18 +71,7 @@ ALTER TABLE public.campaign ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 --
 
 CREATE TABLE public.schema_migrations (
-    version character varying(255) NOT NULL
-);
-
-
---
--- Name: session; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.session (
-    sid character varying NOT NULL,
-    sess json NOT NULL,
-    expire timestamp(6) without time zone NOT NULL
+    version character varying(128) NOT NULL
 );
 
 
@@ -107,21 +89,6 @@ ALTER TABLE ONLY public.campaign
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
-
-
---
--- Name: session session_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.session
-    ADD CONSTRAINT session_pkey PRIMARY KEY (sid);
-
-
---
--- Name: IDX_session_expire; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX "IDX_session_expire" ON public.session USING btree (expire);
 
 
 --

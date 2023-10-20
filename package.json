@@ -25,8 +25,8 @@
     "uuid": "^9.0.0"
   },
   "scripts": {
-    "start": "node server",
-    "dev": "nodemon server"
+    "start_dev": "pm2 start ecosystem.config.cjs --env development",
+    "start_prod": "pm2 start ecosystem.config.cjs --env production"
   },
   "type": "module",
   "name": "arce-ware-server",
