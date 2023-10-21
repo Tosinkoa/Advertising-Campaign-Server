@@ -1,8 +1,8 @@
 module.exports = {
   apps: [
     {
-      name: "PROJECT_NAME",
-      script: "./server.js",
+      name: "advertising_server",
+      script: "server.js",
       instances: 2,
       max_memory_restart: "300M",
       // Logging
